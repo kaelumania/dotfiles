@@ -34,17 +34,17 @@ install homebrew/dupes/screen
 
 
 # Install other useful binaries
-install ack
+#install ack
 #install exiv2
 install git
 install imagemagick --with-webp
 install node # This installs `npm` too using the recommended installation method
-install pv
+#install pv
 install rename
 install tree
-install zopfli
-install ffmpeg --with-libvpx
-install android-platform-tools
+#install zopfli
+#install ffmpeg --with-libvpx
+#install android-platform-tools
 
 # Remove outdated versions from the cellar
 cleanup

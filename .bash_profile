@@ -5,8 +5,6 @@ for file in ~/.{extra,bash_prompt,exports,aliases,functions}; do
 done
 unset file
 
-# init z   https://github.com/rupa/z
-. ~/code/z/z.sh
 
 # bash completion.
 if [ -f `brew --prefix`/etc/bash_completion ]; then
@@ -44,3 +42,6 @@ export LANG="en_US"
 # Add tab completion for `defaults read|write NSGlobalDomain`
 # You could just use `-g` instead, but I like being explicit
 complete -W "NSGlobalDomain" defaults
+
+export RBENV_ROOT=/usr/local/var/rbenv
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
