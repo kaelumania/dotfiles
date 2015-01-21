@@ -6,7 +6,7 @@
   cob = checkout -b
   b = branch
 	c = commit
-  cam = !git add -A && git commit -m
+  cm = !git add -A && git commit -m
 	up = pull
 	p = push
 	s = status -s
