@@ -1,11 +1,11 @@
 [alias]
-	c = commit -am
+  b = branch
+	c = commit
 	up = pull
 	p = push
 	s = status -s
-	df = diff --color --color-words --abbrev
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
-
+  df = diff --color --color-words --abbrev
 	# Show the diff between the latest commit and the current state
 	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 
@@ -25,8 +25,8 @@
 	old = red bold
 	new = green bold
 [color "status"]
-	added = yellow
-	changed = green
+	added = green
+	changed = yellow
 	untracked = cyan
 [merge]
     tool = opendiff
@@ -36,4 +36,11 @@
 
 # push easily. http://stackoverflow.com/a/23918418/89484
 [push]
-	default = current
+  default = simple
+[user]
+  email = stephan.epping@zweitag.de
+  name = Stephan Epping
+[filter "media"]
+  clean = git media clean %f
+  smudge = git media smudge %f
+  required = true

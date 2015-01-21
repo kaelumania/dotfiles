@@ -43,5 +43,5 @@ export LANG="en_US"
 # You could just use `-g` instead, but I like being explicit
 complete -W "NSGlobalDomain" defaults
 
-export RBENV_ROOT=/usr/local/var/rbenv
+#init RBENV
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
