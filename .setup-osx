@@ -133,7 +133,7 @@ defaults write com.apple.BezelServices kDim -bool true
 defaults write com.apple.BezelServices kDimTime -int 300
 
 
-# I LOVE ME SOME speling autocorrect. 
+# I LOVE ME SOME speling autocorrect.
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool true
 
 ###############################################################################

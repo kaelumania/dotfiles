@@ -1,90 +1,43 @@
-# Stephans dotfiles
+# kaelumania's dotfiles
 
-[mathias's readme](https://github.com/mathiasbynens/dotfiles/) is awesome. go read it.
+these are my maybe up-to-date dotfiles
 
-This repo is mostly for me but you're welcome to make suggestions. Mathias's is the project to fork.  I'm mostly catching up to him, @cowboy, and @gf3.
+## Manage dotfiles
 
-## install the necessary apps
+I am managing my dotfiles with [rcm](https://github.com/thoughtbot/rcm)
 
-My basic setup is captured in `install-deps.sh` which adds homebrew, z, nave, etc.
+### Install RCM
 
-## private config
+    brew tap thoughtbot/formulae
+    brew install rcm
 
-Toss it into a file called `.extra` which you do not commit to this repo and just keep in your `~/`
+### Bootstrap dotfiles
 
-I do something nice with my `PATH` there:
+    env RCRC=$HOME/projects/dotfiles/rcrc rcup
 
-```shell
-# PATH like a bawss
-      PATH=/opt/local/bin
-PATH=$PATH:/opt/local/sbin
-PATH=$PATH:/bin
-PATH=$PATH:~/code/git-friendly
-# ...
+This command will create symlinks for config files in your home directory.
+Setting the `RCRC` environment variable tells `rcup` to use the following default configuration options:
 
-export PATH
-```
+* Exclude the `README.md` files, which are part of
+  the `dotfiles` repository but do not need to be symlinked in.
+* Sets the dotfiles directory to 
+  `~/projects/dotfiles`
 
-## Syntax highlighting
+### Update dotfiles
 
-…is really important. even for these files.
+You can safely run `rcup` multiple times to update:
 
-Install [Dotfiles Syntax Highlighting](https://github.com/mattbanks/dotfiles-syntax-highlighting-st2) via [Sublime Text 2 Package Control](http://wbond.net/sublime_packages/package_control)
+    rcup
 
+### Syntax highlighting dotfiles with sublime
 
-### Sensible OS X defaults
+Install [Dotfiles Syntax Highlighting](https://github.com/mattbanks/dotfiles-syntax-highlighting-st2) via [Sublime Text 3 Package Control](http://wbond.net/sublime_packages/package_control)
 
-When setting up a new Mac, you may want to set some sensible OS X defaults:
+## Bootstrap a new machine
 
-```bash
-./.osx
-```
-
-## Similar projects
-
-I recommend getting a [`.jshintrc`](https://github.com/jshint/node-jshint/blob/master/.jshintrc) and [`.editorconfig`](http://editorconfig.org/) defined for all your projects.
-
-
-## NPM things
+When setting up a new Mac, you may want to set some sensible OS X defaults and install default brew packages or applications via cask:
 
 ```bash
-npm install -g jsfmt bower yo
+./.setup-osx
+./.setup-brew
 ```
-
-
-## overview of files
-
-####  Automatic config
-* `.ackrc` - for ack (better than grep)
-* `.vimrc`, `.vim` - vim config, obv.
-
-#### shell environment
-* `.aliases`
-* `.bash_profile`
-* `.bash_prompt`
-* `.bashrc`
-* `.exports`
-* `.functions`
-* `.extra` - not included, explained above
-
-#### manual run
-* `install-deps.sh` - random apps i need installed
-* `.osx` - run on a fresh osx machine
-* `.brew` - homebrew initialization
-
-#### git, brah
-* `.git`
-* `.gitattributes`
-* `.gitconfig`
-* `.gitignore`
-
-* `.inputrc` - config for bash readline
-
-
-## Installation
-
-```bash
-git clone https://github.com/paulirish/dotfiles.git && cd dotfiles && ./sync.sh
-```
-
-To update later on, just run the sync again.

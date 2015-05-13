@@ -12,6 +12,8 @@ alias p="cd ~/Projects"
 alias g="git"
 alias v="vim"
 
+alias be="bundle exec"
+
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
 	colorflag="--color"
@@ -52,9 +54,6 @@ alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && k
 
 # PlistBuddy alias, because sometimes `defaults` just doesn’t cut it
 alias plistbuddy="/usr/libexec/PlistBuddy"
-
-# the subl symlink was probably set up already but in case it wasn't…
-# ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" ~/bin/subl
 
 # i <3 u cask
 alias cask='brew cask'
