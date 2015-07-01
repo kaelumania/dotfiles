@@ -1,2 +1,2 @@
-EXCLUDES="README.md"
-DOTFILES_DIRS="$HOME/projects/dotfiles"
+EXCLUDES='README.md Brewfile install.sh osx.sh rcrc'
+SYMLINK_DIRS='vim'

@@ -28,6 +28,7 @@
 [core]
 	excludesfile = ~/.gitignore
 	attributesfile = ~/.gitattributes
+	editor = vim
 [color "branch"]
 	current = yellow reverse
 	local = yellow
@@ -57,3 +58,7 @@
   clean = git media clean %f
   smudge = git media smudge %f
   required = true
+[filter "hawser"]
+	clean = git hawser clean %f
+	smudge = git hawser smudge %f
+	required = true
