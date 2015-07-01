@@ -18,9 +18,15 @@ set synmaxcol=1000
 " Show line numbers
 set number
 
-" Highlight 80th column
-set textwidth=120
+" Highlight 100th column
+set textwidth=100
 set colorcolumn=+0
+
+"Faster switch from insert to normal mode
+set ttimeoutlen=50
+
+" update 750ms after stop typing
+set updatetime=750
 
 " Default to soft tabs/two spaces
 set expandtab
@@ -125,9 +131,9 @@ set virtualedit+=block
 " Use syntax omnicomplete if no ft specific is available
 if has("autocmd") && exists("+omnifunc")
   autocmd Filetype *
-        \	if &omnifunc == "" |
-        \	 setlocal omnifunc=syntaxcomplete#Complete |
-        \	endif
+        \ if &omnifunc == "" |
+        \  setlocal omnifunc=syntaxcomplete#Complete |
+        \ endif
 endif
 
 " Resize splits when the window is resized
@@ -165,19 +171,18 @@ map <silent> <leader>cp :cprev<cr>
 
 """ PLUGIN SPECIFIC CONFIG
 
-" Ack
-if executable('ag')
-  let g:ackprg = 'ag --nogroup --column'
-  set grepprg=ag\ --nogroup\ --nocolor
-endif
-nnoremap <leader>a :Ack -i ""<left>
-nnoremap <silent>+ *:AckFromSearch<cr>
-nnoremap <silent>- #:AckFromSearch<cr>
-vnoremap <silent>+ :<c-u>call VisualStarSearchSet('/', 'raw')<cr>:AckFromSearch<cr>
-vnoremap <silent>- :<c-u>call VisualStarSearchSet('?', 'raw')<cr>:AckFromSearch<cr>
-
-" Autojump
-noremap <leader>j :J<space>
+" NERDtree
+let g:NERDTreeChDirMode=2
+" These mappings would interfere with vim-tmux-navigator
+let g:NERDTreeMapJumpNextSibling=''
+let g:NERDTreeMapJumpPrevSibling=''
+nnoremap <silent> <leader>n :NERDTreeToggle<cr>
+nnoremap <silent> <leader><leader>n :NERDTreeFind<cr>
+" open NERDtree when no file given to vim
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" close vim if NERDTree is the last buffer
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " Ctrl-P
 if filereadable(expand("~/.vim/plugged/ctrlp.vim/plugin/ctrlp.vim"))
@@ -190,65 +195,47 @@ if filereadable(expand("~/.vim/plugged/ctrlp.vim/plugin/ctrlp.vim"))
   end
 end
 
-" Fugitive
-function! IsFugitiveBuffer(buffer)
-  let bufname = bufname(a:buffer)
-  if bufname =~ '^fugitive:' || bufname =~ 'fugitiveblame$'
-    return 1
-  else
-    return 0
-  endif
-endfunction
-function! CloseFugitiveBuffers()
-  for b in range(1, bufnr('$'))
-    if IsFugitiveBuffer(b)
-      exe 'bw ' . b
-    endif
-  endfor
-endfunction
-nnoremap <leader>gc :silent! call CloseFugitiveBuffers()<cr>
+" Ack
+if executable('ag')
+  let g:ackprg = 'ag --nogroup --column'
+  set grepprg=ag\ --nogroup\ --nocolor
+endif
+nnoremap <leader>a :Ack -i ""<left>
+nnoremap <silent>+ *:AckFromSearch<cr>
+nnoremap <silent>- #:AckFromSearch<cr>
+vnoremap <silent>+ :<c-u>call VisualStarSearchSet('/', 'raw')<cr>:AckFromSearch<cr>
+vnoremap <silent>- :<c-u>call VisualStarSearchSet('?', 'raw')<cr>:AckFromSearch<cr>
 
-" Gist
-let g:gist_detect_filetype = 1
-let g:gist_open_browser_after_post = 1
+" " Fugitive
+" function! IsFugitiveBuffer(buffer)
+"   let bufname = bufname(a:buffer)
+"   if bufname =~ '^fugitive:' || bufname =~ 'fugitiveblame$'
+"     return 1
+"   else
+"     return 0
+"   endif
+" endfunction
+" function! CloseFugitiveBuffers()
+"   for b in range(1, bufnr('$'))
+"     if IsFugitiveBuffer(b)
+"       exe 'bw ' . b
+"     endif
+"   endfor
+" endfunction
+" nnoremap <leader>gc :silent! call CloseFugitiveBuffers()<cr>
 
-" Gundo
-map <silent> <leader>u :silent! GundoToggle<cr>
+" GitGutter
+hi GitGutterAdd ctermfg=green guifg=NONE
+hi GitGutterDelete ctermfg=red guifg=NONE
+hi GitGutterChange ctermfg=yellow guifg=NONE
+hi GitGutterChangeDelete ctermfg=yellow guifg=NONE
 
-" Indent guides
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd cterm=none gui=NONE
-autocmd VimEnter,Colorscheme * :hi link IndentGuidesEven Folded
+" " Gist
+" let g:gist_detect_filetype = 1
+" let g:gist_open_browser_after_post = 1
 
-" NERDtree
-let g:NERDTreeChDirMode=2
-" These mappings would interfere with vim-tmux-navigator
-let g:NERDTreeMapJumpNextSibling=''
-let g:NERDTreeMapJumpPrevSibling=''
-nnoremap <silent> <leader>d :NERDTreeToggle<cr>
-nnoremap <silent> <leader><leader>d :NERDTreeFind<cr>
-
-" Preserve EOL
-let g:PreserveNoEOL = 1
-let g:PreserveNoEOL_Function = function('PreserveNoEOL#Internal#Preserve')
-
-" Seeing is believing
-let g:xmpfilter_cmd = "seeing_is_believing"
-autocmd FileType ruby nmap <buffer> <leader>sm <Plug>(seeing_is_believing-mark)
-autocmd FileType ruby xmap <buffer> <leader>sm <Plug>(seeing_is_believing-mark)
-autocmd FileType ruby imap <buffer> <leader>sm <Plug>(seeing_is_believing-mark)
-autocmd FileType ruby nmap <buffer> <leader>sc <Plug>(seeing_is_believing-clean)
-autocmd FileType ruby xmap <buffer> <leader>sc <Plug>(seeing_is_believing-clean)
-autocmd FileType ruby imap <buffer> <leader>sc <Plug>(seeing_is_believing-clean)
-autocmd FileType ruby nmap <buffer> <leader>sr <Plug>(seeing_is_believing-run)
-autocmd FileType ruby xmap <buffer> <leader>sr <Plug>(seeing_is_believing-run)
-autocmd FileType ruby imap <buffer> <leader>sr <Plug>(seeing_is_believing-run)
-autocmd FileType ruby nmap <buffer> <leader>sR <Plug>(seeing_is_believing-run_-x)
-autocmd FileType ruby xmap <buffer> <leader>sR <Plug>(seeing_is_believing-run_-x)
-autocmd FileType ruby imap <buffer> <leader>sR <Plug>(seeing_is_believing-run_-x)
-
-" Signify
-let g:signify_disable_by_default=1
+" " Gundo
+" map <silent> <leader>u :silent! GundoToggle<cr>
 
 " Syntastic
 let g:syntastic_error_symbol='●'
@@ -258,38 +245,46 @@ let g:syntastic_style_warning_symbol='□'
 let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 let g:syntastic_mode_map = {'mode': 'passive'}
 
-" Tmux
-let g:no_turbux_mappings = 1
-map <leader>t <Plug>SendTestToTmux
-map <leader><leader>t <Plug>SendFocusedTestToTmux
-map <Leader>T :call RunAllSpecs()<CR>
+" Preserve EOL
+let g:PreserveNoEOL = 1
+let g:PreserveNoEOL_Function = function('PreserveNoEOL#Internal#Preserve')
 
-" Tmux + RSpec + Spring
-function! SetRspecCommand()
-  " q - exit tmux's visual mode
-  " C-u - clear existing input
+" Indent guides
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd cterm=none gui=NONE
+autocmd VimEnter,Colorscheme * :hi link IndentGuidesEven Folded
+
+" " Tmux
+" let g:no_turbux_mappings = 1
+" map <leader>t <Plug>SendTestToTmux
+" map <leader><leader>t <Plug>SendFocusedTestToTmux
+" map <Leader>T :call RunAllSpecs()<CR>
+
+" " Tmux + RSpec + Spring
+" function! SetRspecCommand()
+"   " q - exit tmux's visual mode
+"   " C-u - clear existing input
   " C-c (twice) - abort currently running spec
-  let common_prefix = 'q'
-  call system('bundle show spring')
-  if !v:shell_error
-    let common_prefix = common_prefix.'spring '
-  endif
-  let g:turbux_command_prefix = common_prefix
-  let g:rspec_command = 'call VimuxRunCommand("'.common_prefix.'rspec {spec}\n")'
-endfunction
-call SetRspecCommand()
+  " let common_prefix = 'q'
+  " call system('bundle show spring')
+  " if !v:shell_error
+  "   let common_prefix = common_prefix.'spring '
+  " endif
+  " let g:turbux_command_prefix = common_prefix
+  " let g:rspec_command = 'call VimuxRunCommand("'.common_prefix.'rspec {spec}\n")'
+" endfunction
+" call SetRspecCommand()
 
-" ZoomWin
-nnoremap <silent> <C-w>z :ZoomWin<cr>
+" " ZoomWin
+" nnoremap <silent> <C-w>z :ZoomWin<cr>
 
 
 """ FANCYNESS
 
 " Colors
+set t_Co=256
 set background=dark
-if filereadable(expand("~/.vim/plugged/base16-vim/colors/base16-default.vim"))
-  colorscheme base16-default
-end
+colorscheme solarized
 
 " Hightlight current line
 set cursorline
@@ -297,23 +292,21 @@ set cursorline
 " Invisibles
 set listchars=tab:▸\ ,eol:¬,trail:·,extends:>,precedes:<,nbsp:␣
 
-" Splits
+"" Splits
 set fillchars+=vert:│
 hi VertSplit ctermbg=none ctermfg=10 guibg=NONE guifg=#202020
 
-" Simple gutter colors
+" Gutter
 hi LineNr ctermbg=none guibg=NONE
 hi FoldColumn ctermbg=none guibg=NONE
-hi SignColumn ctermfg=red ctermbg=none guifg=red guibg=NONE
+hi SignColumn ctermbg=none guibg=NONE
 hi Error ctermfg=red ctermbg=none guifg=red guibg=NONE
 hi Todo ctermfg=178 ctermbg=none guifg=orange guibg=NONE
-hi SignifySignAdd ctermbg=none guibg=NONE
-hi SignifySignDelete ctermbg=none guibg=NONE
-hi SignifySignChange ctermbg=none guibg=NONE
 
 " Airline
 set laststatus=2
 set noshowmode
+let g:airline_enable_hunks = 0
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 let g:airline_section_z = '%l:%c %p%%'

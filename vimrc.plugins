@@ -2,8 +2,7 @@ call plug#begin('~/.vim/plugged')
 
 " Dependencies
 Plug 'tpope/vim-repeat'
-Plug 'kana/vim-textobj-user'
-Plug 'nelstrom/vim-textobj-rubyblock'
+
 Plug 'vim-scripts/matchit.zip'
 Plug 'mattn/webapi-vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -13,56 +12,63 @@ Plug 'rizzatti/funcoo.vim'
 " File management
 Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
-Plug 'pbrisbin/vim-mkdir'
+
+" Search
+Plug 'mileszs/ack.vim'
+Plug 'bronson/vim-visual-star-search'
+
+"" Version control
+" Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 " Smart input
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 
-" Version control
-Plug 'tpope/vim-fugitive'
-Plug 'mhinz/vim-signify'
-
 " Little helpers
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rake'
 Plug 'tpope/vim-bundler'
 Plug 'godlygeek/tabular'
-Plug 'tpope/vim-characterize'
-Plug 'mattn/gist-vim'
-Plug 'ciaranm/detectindent'
-Plug 'sjl/gundo.vim'
-Plug 'scrooloose/syntastic'
+
+" Text objects
+Plug 'kana/vim-textobj-user'
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'mileszs/ack.vim'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'vim-scripts/PreserveNoEOL'
-Plug 'vim-scripts/ZoomWin'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'sjl/vitality.vim'
-Plug 'tommcdo/vim-exchange'
-Plug 'padde/jump.vim'
-Plug 'thoughtbot/vim-rspec'
-Plug 'benmills/vimux'
-Plug 'jgdavey/vim-turbux'
+Plug 'nelstrom/vim-textobj-rubyblock'
+
+" Ruby
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rbenv'
-Plug 't9md/vim-ruby-xmpfilter'
-Plug 'fidian/hexmode'
 
 " Syntax
+Plug 'scrooloose/syntastic'
+Plug 'vim-scripts/PreserveNoEOL'
 Plug 'othree/html5.vim'
 Plug 'tpope/vim-haml'
 Plug 'tpope/vim-markdown'
 Plug 'kchmck/vim-coffee-script'
-Plug 'groenewege/vim-less'
-Plug 'bronson/vim-visual-star-search'
+Plug 'nathanaelkane/vim-indent-guides'
 
 " Fancyness
-Plug 'chriskempson/base16-vim'
+Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
-Plug 'nathanaelkane/vim-indent-guides'
+
+" Tmux
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'sjl/vitality.vim'
+" Plug 'benmills/vimux'
+" Plug 'jgdavey/vim-turbux'
+
+" Nice to have
+" Plug 'mattn/gist-vim'
+" Plug 'sjl/gundo.vim'
+" Plug 'vim-scripts/ZoomWin'
+" Plug 'terryma/vim-multiple-cursors'
+" Plug 'tommcdo/vim-exchange'
+" Plug 'thoughtbot/vim-rspec'
+" Plug 'fidian/hexmode'
+
 
 if filereadable(expand("~/.vimrc.plugins.local"))
   source ~/.vimrc.plugins.local

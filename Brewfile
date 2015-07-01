@@ -24,7 +24,6 @@ brew 'macvim', args: ['override-system-vim']
 brew  'git'
 brew  'node'
 
-brew 'autojump'
 brew 'rbenv'
 brew 'rbenv-gem-rehash'
 brew 'reattach-to-user-namespace'
