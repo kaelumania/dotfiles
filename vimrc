@@ -282,7 +282,8 @@ autocmd VimEnter,Colorscheme * :hi link IndentGuidesEven Folded
 """ FANCYNESS
 
 " Colors
-set t_Co=256
+" set t_Co=256
+" let g:solarized_termcolors=256
 set background=dark
 colorscheme solarized
 
