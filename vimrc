@@ -323,6 +323,8 @@ let g:airline_mode_map = {
   \ '' : 'VB',
   \ }
 
+" Instant Markdown
+let g:instant_markdown_autostart = 0
 
 """ LOCAL CONFIG
 

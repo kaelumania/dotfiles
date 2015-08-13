@@ -18,7 +18,7 @@ Plug 'mileszs/ack.vim'
 Plug 'bronson/vim-visual-star-search'
 
 "" Version control
-" Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " Smart input
@@ -49,6 +49,7 @@ Plug 'tpope/vim-haml'
 Plug 'tpope/vim-markdown'
 Plug 'kchmck/vim-coffee-script'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'suan/vim-instant-markdown'
 
 " Fancyness
 Plug 'altercation/vim-colors-solarized'
