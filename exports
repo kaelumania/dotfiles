@@ -1,7 +1,7 @@
 export PATH="~/bin:$PATH"
 export PATH="/usr/local/heroku/bin:$PATH"
 
-# Make Sublime the default editor
+# Make VIM the default editor
 export EDITOR="vim"
 
 # Don’t clear the screen after quitting a manual page
@@ -20,8 +20,10 @@ export HISTTIMEFORMAT
 # Make some commands not show up in history
 export HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help"
 
+# configure go
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 export PATH="$PATH:/usr/local/opt/go/libexec/bin"
 
+# configure zt
 export ZT_DEPLOY_USER="stephan-epping"
