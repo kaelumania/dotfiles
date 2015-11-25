@@ -14,8 +14,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
 
 " Search
-Plug 'mileszs/ack.vim'
-Plug 'bronson/vim-visual-star-search'
+Plug 'rking/ag.vim'
+Plug 'valloric/youcompleteme'
 
 "" Version control
 Plug 'tpope/vim-fugitive'
@@ -50,6 +50,7 @@ Plug 'tpope/vim-markdown'
 Plug 'kchmck/vim-coffee-script'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'suan/vim-instant-markdown'
+Plug 'pangloss/vim-javascript'
 
 " Fancyness
 Plug 'altercation/vim-colors-solarized'

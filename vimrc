@@ -148,6 +148,9 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
+" map jk to escape
+inoremap jk <ESC>
+
 " Map non-breaking space to space
 inoremap <A-space> <space>
 
@@ -159,7 +162,7 @@ cnoremap <c-n> <down>
 nnoremap <silent> <space> :noh<cr><space>
 
 " Highlight last pasted text
-nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
+" nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 " Reload vimrc after saving it
 autocmd! bufwritepost vimrc* source ~/.vimrc
@@ -168,11 +171,16 @@ autocmd! bufwritepost vimrc* source ~/.vimrc
 map <silent> <leader>cn :cnext<cr>
 map <silent> <leader>cp :cprev<cr>
 
+map <silent> <leader>f gg=G''
+
+" Allow to repeat command over multiple lines separately
+vnoremap . :norm.<CR>
 
 """ PLUGIN SPECIFIC CONFIG
 
 " NERDtree
 let g:NERDTreeChDirMode=2
+let g:NERDTreeShowHidden=1
 " These mappings would interfere with vim-tmux-navigator
 let g:NERDTreeMapJumpNextSibling=''
 let g:NERDTreeMapJumpPrevSibling=''
@@ -194,17 +202,6 @@ if filereadable(expand("~/.vim/plugged/ctrlp.vim/plugin/ctrlp.vim"))
     let g:ctrlp_use_caching = 0
   end
 end
-
-" Ack
-if executable('ag')
-  let g:ackprg = 'ag --nogroup --column'
-  set grepprg=ag\ --nogroup\ --nocolor
-endif
-nnoremap <leader>a :Ack -i ""<left>
-nnoremap <silent>+ *:AckFromSearch<cr>
-nnoremap <silent>- #:AckFromSearch<cr>
-vnoremap <silent>+ :<c-u>call VisualStarSearchSet('/', 'raw')<cr>:AckFromSearch<cr>
-vnoremap <silent>- :<c-u>call VisualStarSearchSet('?', 'raw')<cr>:AckFromSearch<cr>
 
 " " Fugitive
 " function! IsFugitiveBuffer(buffer)
