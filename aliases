@@ -13,6 +13,8 @@ alias g="git"
 alias v="vim"
 
 alias be="bundle exec"
+alias dc="docker-compose"
+alias dm="docker-machine"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
