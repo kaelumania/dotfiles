@@ -1,2 +1,2 @@
 EXCLUDES='README.md Brewfile install.sh osx.sh rcrc'
-SYMLINK_DIRS='vim'
+SYMLINK_DIRS='vim config/fish config/omf config/git'
