@@ -6,7 +6,8 @@
   cob = checkout -b
   b = branch
 	c = commit
-  cm = !git add -A && git commit -m
+  cm = git commit -m
+  cam = !git add -A && git commit -m
 	up = pull
 	p = push
 	s = status -s
@@ -62,3 +63,5 @@
 	clean = git hawser clean %f
 	smudge = git hawser smudge %f
 	required = true
+[mergetool]
+	keepBackup = false
