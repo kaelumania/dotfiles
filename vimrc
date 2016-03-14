@@ -26,7 +26,7 @@ set colorcolumn=+0
 set ttimeoutlen=50
 
 " update 750ms after stop typing
-set updatetime=750
+set updatetime=500
 
 " Default to soft tabs/two spaces
 set expandtab
@@ -129,18 +129,21 @@ set shortmess=atI
 set virtualedit+=block
 
 " Use syntax omnicomplete if no ft specific is available
-if has("autocmd") && exists("+omnifunc")
-  autocmd Filetype *
-        \ if &omnifunc == "" |
-        \  setlocal omnifunc=syntaxcomplete#Complete |
-        \ endif
-endif
+" if has("autocmd") && exists("+omnifunc")
+"   autocmd Filetype *
+"         \ if &omnifunc == "" |
+"         \  setlocal omnifunc=syntaxcomplete#Complete |
+"         \ endif
+" endif
 
 " Resize splits when the window is resized
 au VimResized * :wincmd =
 
 
 """ CUSTOM MAPPINGS AND COMMANDS
+
+" E.g. press ;w instead of shift : unshift w
+nnoremap ; :
 
 " Disable Arrow Keys
 noremap <Up> <NOP>
@@ -164,9 +167,6 @@ nnoremap <silent> <space> :noh<cr><space>
 " Highlight last pasted text
 " nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
-" Reload vimrc after saving it
-autocmd! bufwritepost vimrc* source ~/.vimrc
-
 " Prev/next item in quickfix list
 map <silent> <leader>cn :cnext<cr>
 map <silent> <leader>cp :cprev<cr>
@@ -184,13 +184,9 @@ let g:NERDTreeShowHidden=1
 " These mappings would interfere with vim-tmux-navigator
 let g:NERDTreeMapJumpNextSibling=''
 let g:NERDTreeMapJumpPrevSibling=''
+let NERDTreeIgnore=[  '^\.git$', 'DS_STORE' ]
 nnoremap <silent> <leader>n :NERDTreeToggle<cr>
 nnoremap <silent> <leader><leader>n :NERDTreeFind<cr>
-" open NERDtree when no file given to vim
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" close vim if NERDTree is the last buffer
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " Ctrl-P
 if filereadable(expand("~/.vim/plugged/ctrlp.vim/plugin/ctrlp.vim"))
@@ -203,36 +199,11 @@ if filereadable(expand("~/.vim/plugged/ctrlp.vim/plugin/ctrlp.vim"))
   end
 end
 
-" " Fugitive
-" function! IsFugitiveBuffer(buffer)
-"   let bufname = bufname(a:buffer)
-"   if bufname =~ '^fugitive:' || bufname =~ 'fugitiveblame$'
-"     return 1
-"   else
-"     return 0
-"   endif
-" endfunction
-" function! CloseFugitiveBuffers()
-"   for b in range(1, bufnr('$'))
-"     if IsFugitiveBuffer(b)
-"       exe 'bw ' . b
-"     endif
-"   endfor
-" endfunction
-" nnoremap <leader>gc :silent! call CloseFugitiveBuffers()<cr>
-
 " GitGutter
 hi GitGutterAdd ctermfg=green guifg=NONE
 hi GitGutterDelete ctermfg=red guifg=NONE
 hi GitGutterChange ctermfg=yellow guifg=NONE
 hi GitGutterChangeDelete ctermfg=yellow guifg=NONE
-
-" " Gist
-" let g:gist_detect_filetype = 1
-" let g:gist_open_browser_after_post = 1
-
-" " Gundo
-" map <silent> <leader>u :silent! GundoToggle<cr>
 
 " Syntastic
 let g:syntastic_error_symbol='●'
@@ -245,11 +216,6 @@ let g:syntastic_mode_map = {'mode': 'passive'}
 " Preserve EOL
 let g:PreserveNoEOL = 1
 let g:PreserveNoEOL_Function = function('PreserveNoEOL#Internal#Preserve')
-
-" Indent guides
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd cterm=none gui=NONE
-autocmd VimEnter,Colorscheme * :hi link IndentGuidesEven Folded
 
 " " Tmux
 " let g:no_turbux_mappings = 1
@@ -272,14 +238,10 @@ autocmd VimEnter,Colorscheme * :hi link IndentGuidesEven Folded
 " endfunction
 " call SetRspecCommand()
 
-" " ZoomWin
-" nnoremap <silent> <C-w>z :ZoomWin<cr>
-
-
 """ FANCYNESS
 
 " Colors
-" set t_Co=256
+set t_Co=256
 " let g:solarized_termcolors=256
 set background=dark
 colorscheme solarized
@@ -301,7 +263,7 @@ hi SignColumn ctermbg=none guibg=NONE
 hi Error ctermfg=red ctermbg=none guifg=red guibg=NONE
 hi Todo ctermfg=178 ctermbg=none guifg=orange guibg=NONE
 
-" Airline
+" " Airline
 set laststatus=2
 set noshowmode
 let g:airline_enable_hunks = 0
@@ -320,10 +282,10 @@ let g:airline_mode_map = {
   \ '' : 'VB',
   \ }
 
-" Instant Markdown
-let g:instant_markdown_autostart = 0
-
 """ LOCAL CONFIG
+
+" Reload vimrc after saving it
+autocmd! bufwritepost vimrc* source ~/.vimrc
 
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
