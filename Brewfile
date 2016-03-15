@@ -1,38 +1,31 @@
 tap 'caskroom/cask'
 tap 'caskroom/versions'
+tap 'thoughtbot/formulae'
 
 #  Utils
 brew 'coreutils'
 brew 'moreutils'
 brew 'findutils'
 brew 'gnu-sed', args: ['default-names']
-brew 'grc' # generic colouriser  http://kassiopeia.juls.savba.sk/~garabik/software/grc/
-brew 'bash'
-brew 'bash-completion'
 brew 'homebrew/dupes/grep'
 brew 'homebrew/dupes/screen'
-brew 'wget', args: ['enable-iri']
-brew 'ack'
 brew 'ag'
 brew 'tree'
 brew 'rename'
-brew 'imagemagick', args: ['with-webp']
 
 # Basic
-# brew  'vim', args: ['override-system-vi']
 brew 'macvim', args: ['override-system-vim']
-brew  'git'
-brew  'node'
+brew 'git'
+brew 'node'
 
+# Ruby
 brew 'rbenv'
 brew 'rbenv-gem-rehash'
-brew 'reattach-to-user-namespace'
 brew 'ruby-build'
+
+brew 'reattach-to-user-namespace'
 brew 'the_silver_searcher'
 brew 'tmux'
-
-tap 'thoughtbot/formulae'
-brew 'gitsh'
 brew 'rcm'
 
 # quicklook plugins
