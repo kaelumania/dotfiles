@@ -1,0 +1,56 @@
+# remove greeting
+set fish_greeting
+
+# Use vi bindings
+fish_vi_mode
+
+# Set default editor to vim
+set -gx EDITOR vim
+
+# Base abbr.
+abbr -a v vim
+abbr -a g git
+abbr -a be bundle exec
+abbr -a d docker
+abbr -a dm docker-machine
+abbr -a dc docker-compose
+
+# Git abbr.
+abbr -a gc git commit -v
+abbr -a ga git add
+abbr -a gco git checkout
+abbr -a gr git remote
+abbr -a grh git reset HEAD
+abbr -a grhh git reset HEAD --hard
+abbr -a lg git lg
+
+# Useful functions
+
+# Run git status if git is called without args
+function git
+  if count $argv > /dev/null # alternative: set -q argv
+    command git $argv
+  else
+    command git status -sb
+  end
+end
+
+# Recursively delete `.DS_Store` files
+function cleanup
+  find . -name '*.DS_Store' -type f -ls -delete
+end
+
+# Empty the Trash on all mounted volumes and the main HDD
+function emptytrash
+  sudo rm -rfv /Volumes/*/.Trashes; rm -rfv ~/.Trash
+end
+
+# Hide all desktop icons (useful when presenting)
+function hidedesktop
+  defaults write com.apple.finder CreateDesktop -bool false and killall Finder
+end
+
+# Show all desktop icons (useful when presenting)
+function showdesktop
+  defaults write com.apple.finder CreateDesktop -bool true and killall Finder
+end

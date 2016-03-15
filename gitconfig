@@ -63,12 +63,7 @@
 	clean = git hawser clean %f
 	smudge = git hawser smudge %f
 	required = true
-<<<<<<< HEAD:gitconfig
-[mergetool]
-	keepBackup = false
-=======
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
->>>>>>> 18e920f5ed1ebe7ed089e7a40c120c2f40c7b430:config/git/config

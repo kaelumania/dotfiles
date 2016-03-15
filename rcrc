@@ -1,3 +1,2 @@
-EXCLUDES='README.md Brewfile install.sh osx.sh rcrc'
-COPY_ALWAYS="config/fish/config.fish"
-SYMLINK_DIRS='vim config/fish config/omf config/git'
+EXCLUDES='README.md Brewfile Makefile install.sh osx.sh rcrc'
+SYMLINK_DIRS='vim omf ./config/omf/'

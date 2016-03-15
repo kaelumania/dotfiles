@@ -3,6 +3,8 @@ if filereadable(expand("~/.vimrc.plugins"))
   source ~/.vimrc.plugins
 endif
 
+" http://stackoverflow.com/questions/12230290/vim-errors-on-vim-startup-when-run-in-fish-shell
+set shell=/bin/sh 
 
 """ GENERAL SETTINGS
 

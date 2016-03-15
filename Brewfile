@@ -14,19 +14,18 @@ brew 'tree'
 brew 'rename'
 
 # Basic
+brew 'fish'
 brew 'macvim', args: ['override-system-vim']
 brew 'git'
 brew 'node'
+brew 'rcm'
 
-# Ruby
+# Other
 brew 'rbenv'
-brew 'rbenv-gem-rehash'
 brew 'ruby-build'
-
 brew 'reattach-to-user-namespace'
 brew 'the_silver_searcher'
 brew 'tmux'
-brew 'rcm'
 
 # quicklook plugins
 cask 'qlcolorcode'

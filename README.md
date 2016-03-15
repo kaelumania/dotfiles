@@ -1,23 +1,27 @@
 # kaelumania's dotfiles
 
-these are my maybe up-to-date dotfiles
+These are my current dotfiles and setup code
 
-## Installation dotfiles
-    curl -fsSL https://raw.githubusercontent.com/kaelumania/dotfiles/master/install.sh | sh
+## Setup a new Machine
 
-I am managing my dotfiles with [rcm](https://github.com/thoughtbot/rcm)
+### Clone this repository
 
-### Update dotfiles
+`git clone git@github.com:kaelumania/dotfiles.git ~/.dotfiles`
 
-You can safely run `rcup` multiple times to update:
+### Execute Makefile
 
-    rcup
+`make install`
 
-## Bootstrapping a new machine
+### Install powerline font
 
-When setting up a new Mac, you may want to set some sensible OS X defaults and install default brew packages or applications via cask:
+Install the font on your system:
 
-```bash
-./install.sh
-./osx.sh
-```
+https://gist.github.com/baopham/1838072#file-monaco-for-powerline-otf
+
+Add this font to iTerm2:
+
+`iTerm > Preferences > Profiles > Text`
+
+## Side Notes
+
+* I am using rcm to manage rc files [rcm](https://github.com/thoughtbot/rcm). In order to relink all rc files you can run `rcup -f`

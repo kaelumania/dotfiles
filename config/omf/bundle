@@ -1,2 +1,4 @@
 package peco
+package rbenv
+theme agnoster
 theme default
