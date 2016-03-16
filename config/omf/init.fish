@@ -33,6 +33,21 @@ abbr -a gd git d
 abbr -a gdf git diff
 abbr -a gdfc git diff --cached
 
+# Key Bindings
+bind --mode insert --sets-mode default jk backward-char force-repaint
+
+bind -M visual -m insert c kill-selection end-selection force-repaint
+
+bind \cl 'clear; commandline -f repaint'
+bind -M insert \cl 'clear; commandline -f repaint'
+
+bind -M insert \ca accept-autosuggestion
+
+bind \ck backward-kill-line
+
+bind \cr peco_select_history
+bind -M insert \cr peco_select_history
+
 # Useful functions
 
 # Run git status if git is called without args
