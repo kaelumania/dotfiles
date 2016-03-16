@@ -16,13 +16,22 @@ abbr -a dm docker-machine
 abbr -a dc docker-compose
 
 # Git abbr.
-abbr -a gc git commit -v
 abbr -a ga git add
+abbr -a gb git branch
+abbr -a gc git commit -v
+abbr -a gcm git commit -m
+abbr -a gcam git add -A and git commit -m
 abbr -a gco git checkout
+abbr -a gcob git checkout -b
 abbr -a gr git remote
 abbr -a grh git reset HEAD
 abbr -a grhh git reset HEAD --hard
-abbr -a lg git lg
+abbr -a gp git pull
+abbr -a gup git push
+abbr -a gs git status -s
+abbr -a gd git diff-index --quiet HEAD -- or clear; git --no-pager diff --patch-with-stat
+abbr -a gdf git diff
+abbr -a gdfc git diff --cached
 
 # Useful functions
 

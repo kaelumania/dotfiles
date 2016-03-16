@@ -1,20 +1,25 @@
 [alias]
-  al = "!git config -l | grep alias | cut -c 7-"
+  lc = "!git config -l | grep alias | cut -c 7-"
   ec = config --global -e
 
+  a = add
+  b = branch
+	c = commit -v
+  cm = commit -m
+  cam = !git add -A and git commit -m
   co = checkout
   cob = checkout -b
-  b = branch
-	c = commit
-  cm = git commit -m
-  cam = !git add -A && git commit -m
-	up = pull
-	p = push
+  r = remote
+  rh = reset HEAD
+  rhh = reset HEAD --hard
+	p = pull
+	up = push
 	s = status -s
 
-  df = diff --color --color-words --abbrev
 	# Show the diff between the latest commit and the current state
 	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+  df = diff --color --color-words --abbrev
+  dfc = diff --cached
 
   le = log --oneline --decorate
   ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
@@ -22,6 +27,10 @@
   lh = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
   ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+  who = shortlog -s --
+
+  # Open local git server
+  serve = !git daemon --reuseaddr --verbose --base-path=. --export-all ./.git
 
 [color]
 	ui = true
