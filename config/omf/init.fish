@@ -78,3 +78,6 @@ end
 function showdesktop
   defaults write com.apple.finder CreateDesktop -bool true and killall Finder
 end
+
+autoload $OMF_CONFIG/completions/
+autoload $OMF_CONFIG/functions/
