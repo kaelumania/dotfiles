@@ -29,7 +29,7 @@ abbr -a grhh git reset HEAD --hard
 abbr -a gp git pull
 abbr -a gup git push
 abbr -a gs git status -s
-abbr -a gd git diff-index --quiet HEAD -- or clear; git --no-pager diff --patch-with-stat
+abbr -a gd git d
 abbr -a gdf git diff
 abbr -a gdfc git diff --cached
 
