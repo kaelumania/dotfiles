@@ -1,4 +1,4 @@
 package peco
 package rbenv
-theme agnoster
+theme bobthefish
 theme default
