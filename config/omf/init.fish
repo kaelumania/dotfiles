@@ -1,8 +1,8 @@
+# load additional completions
+# autoload $OMF_CONFIG/completions/
+
 # remove greeting
 set fish_greeting
-
-# Use vi bindings
-fish_vi_mode
 
 # Set default editor to vim
 set -gx EDITOR vim
@@ -33,51 +33,19 @@ abbr -a gd git d
 abbr -a gdf git diff
 abbr -a gdfc git diff --cached
 
-# Key Bindings
-bind --mode insert --sets-mode default jk backward-char force-repaint
+# Use vi bindings
+# https://github.com/fish-shell/fish-shell/issues/2254
+# fish_vi_mode
+# set fish_key_bindings fish_vi_key_bindings
 
-bind -M visual -m insert c kill-selection end-selection force-repaint
+# key bindings
+# https://github.com/oh-my-fish/oh-my-fish/issues/211
+function fish_user_key_bindings
+  bind --mode insert --sets-mode default jk backward-char force-repaint
 
-bind \cl 'clear; commandline -f repaint'
-bind -M insert \cl 'clear; commandline -f repaint'
+  bind \cl 'clear; commandline -f repaint'
+  bind -M insert \cl 'clear; commandline -f repaint'
 
-bind -M insert \ca accept-autosuggestion
-
-bind \ck backward-kill-line
-
-bind \cr peco_select_history
-bind -M insert \cr peco_select_history
-
-# Useful functions
-
-# Run git status if git is called without args
-function git
-  if count $argv > /dev/null # alternative: set -q argv
-    command git $argv
-  else
-    command git status -sb
-  end
+  bind \cr 'peco_select_history (commandline -b)'
+  bind -M insert \cr 'peco_select_history (commandline -b)'
 end
-
-# Recursively delete `.DS_Store` files
-function cleanup
-  find . -name '*.DS_Store' -type f -ls -delete
-end
-
-# Empty the Trash on all mounted volumes and the main HDD
-function emptytrash
-  sudo rm -rfv /Volumes/*/.Trashes; rm -rfv ~/.Trash
-end
-
-# Hide all desktop icons (useful when presenting)
-function hidedesktop
-  defaults write com.apple.finder CreateDesktop -bool false and killall Finder
-end
-
-# Show all desktop icons (useful when presenting)
-function showdesktop
-  defaults write com.apple.finder CreateDesktop -bool true and killall Finder
-end
-
-autoload $OMF_CONFIG/completions/
-autoload $OMF_CONFIG/functions/
