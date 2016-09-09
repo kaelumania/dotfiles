@@ -1,2 +1,2 @@
-EXCLUDES='README.md Brewfile Makefile install.sh osx.sh rcrc'
-SYMLINK_DIRS='vim omf ./config/omf/'
+EXCLUDES='Brewfile Makefile osx.sh rcrc README.md'
+SYMLINK_DIRS='vim'

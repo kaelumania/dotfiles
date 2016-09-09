@@ -12,6 +12,8 @@ These are my current dotfiles and setup code
 
 `make install`
 
+`./osx.sh`
+
 ### Install powerline font
 
 Install the font on your system:
