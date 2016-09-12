@@ -27,7 +27,7 @@ set colorcolumn=+0
 "Faster switch from insert to normal mode
 set ttimeoutlen=50
 
-" update 750ms after stop typing
+" update 500ms after stop typing
 set updatetime=500
 
 " Default to soft tabs/two spaces
@@ -130,31 +130,22 @@ set shortmess=atI
 " Arbitrary selection in visual block mode
 set virtualedit+=block
 
-" Use syntax omnicomplete if no ft specific is available
-" if has("autocmd") && exists("+omnifunc")
-"   autocmd Filetype *
-"         \ if &omnifunc == "" |
-"         \  setlocal omnifunc=syntaxcomplete#Complete |
-"         \ endif
-" endif
-
 " Resize splits when the window is resized
 au VimResized * :wincmd =
-
 
 """ CUSTOM MAPPINGS AND COMMANDS
 
 " E.g. press ;w instead of shift : unshift w
 nnoremap ; :
 
+" map jk to escape
+inoremap jk <ESC>
+
 " Disable Arrow Keys
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
-
-" map jk to escape
-inoremap jk <ESC>
 
 " Map non-breaking space to space
 inoremap <A-space> <space>
@@ -163,15 +154,12 @@ inoremap <A-space> <space>
 cnoremap <c-p> <up>
 cnoremap <c-n> <down>
 
-" Clear search
-nnoremap <silent> <space> :noh<cr><space>
-
-" Highlight last pasted text
-" nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
-
 " Prev/next item in quickfix list
 map <silent> <leader>cn :cnext<cr>
 map <silent> <leader>cp :cprev<cr>
+
+" Clear search
+nnoremap <silent> <space> :noh<cr><space>
 
 map <silent> <leader>f gg=G''
 
@@ -265,7 +253,7 @@ hi SignColumn ctermbg=none guibg=NONE
 hi Error ctermfg=red ctermbg=none guifg=red guibg=NONE
 hi Todo ctermfg=178 ctermbg=none guifg=orange guibg=NONE
 
-" " Airline
+" Airline
 set laststatus=2
 set noshowmode
 let g:airline_enable_hunks = 0

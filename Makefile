@@ -13,8 +13,8 @@ install-fish:
 	chsh -s `which fish`
 
 install-rcs:
-	rcup -v -f rcrc
-	rcup -v -f
+	rcup -v -i rcrc
+	rcup -v -i
 
 install-fisherman:
 	curl -Lo ./config/fish/functions/fisher.fish --create-dirs git.io/fisher
