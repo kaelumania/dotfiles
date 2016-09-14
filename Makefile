@@ -1,4 +1,4 @@
-install: install-brew install-bundle install-fish install-rcs install-fisherman install-vim-plugins
+install: install-brew install-bundle install-fish install-rcs install-vim-plugins
 
 install-brew:
 	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -15,9 +15,6 @@ install-fish:
 install-rcs:
 	rcup -v -i rcrc
 	rcup -v -i
-
-install-fisherman:
-	curl -Lo ./config/fish/functions/fisher.fish --create-dirs git.io/fisher
 
 install-vim-plugins:
 	exec vim +PlugInstall +qall < /dev/tty "$@"

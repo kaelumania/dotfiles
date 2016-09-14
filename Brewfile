@@ -1,6 +1,7 @@
 tap 'caskroom/cask'
 tap 'caskroom/versions'
 tap 'thoughtbot/formulae'
+tap 'fisherman/tap'
 
 #  Utils
 brew 'coreutils'
@@ -12,9 +13,11 @@ brew 'homebrew/dupes/screen'
 brew 'ag'
 brew 'tree'
 brew 'rename'
+brew 'ctags'
 
 # Basic
 brew 'fish'
+brew 'fisherman'
 brew 'macvim', args: ['override-system-vim']
 brew 'git'
 brew 'node'

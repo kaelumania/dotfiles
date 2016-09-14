@@ -4,7 +4,7 @@ if filereadable(expand("~/.vimrc.plugins"))
 endif
 
 " http://stackoverflow.com/questions/12230290/vim-errors-on-vim-startup-when-run-in-fish-shell
-set shell=/bin/sh 
+set shell=/bin/sh
 
 """ GENERAL SETTINGS
 
@@ -61,7 +61,7 @@ else
 end
 
 " Share clipboard
-set clipboard+=unnamed
+set clipboard=unnamed
 
 " Nobody likes \ as leader!
 let mapleader = ","
@@ -161,6 +161,7 @@ map <silent> <leader>cp :cprev<cr>
 " Clear search
 nnoremap <silent> <space> :noh<cr><space>
 
+" Reformat whole file
 map <silent> <leader>f gg=G''
 
 " Allow to repeat command over multiple lines separately
@@ -189,6 +190,15 @@ if filereadable(expand("~/.vim/plugged/ctrlp.vim/plugin/ctrlp.vim"))
   end
 end
 
+" Ack/Ag
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep --smart-case'
+endif
+cnoreabbrev ag Ack
+cnoreabbrev aG Ack
+cnoreabbrev Ag Ack
+cnoreabbrev AG Ack
+
 " GitGutter
 hi GitGutterAdd ctermfg=green guifg=NONE
 hi GitGutterDelete ctermfg=red guifg=NONE
@@ -196,37 +206,26 @@ hi GitGutterChange ctermfg=yellow guifg=NONE
 hi GitGutterChangeDelete ctermfg=yellow guifg=NONE
 
 " Syntastic
-let g:syntastic_error_symbol='●'
-let g:syntastic_warning_symbol='■'
-let g:syntastic_style_error_symbol='○'
-let g:syntastic_style_warning_symbol='□'
-let g:syntastic_ruby_checkers = ['mri', 'rubocop']
-let g:syntastic_mode_map = {'mode': 'passive'}
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_ruby_checkers = ['rubocop']
+let g:syntastic_mode_map = {'mode': 'active'}
+
+" RSpec
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
 
 " Preserve EOL
 let g:PreserveNoEOL = 1
 let g:PreserveNoEOL_Function = function('PreserveNoEOL#Internal#Preserve')
-
-" " Tmux
-" let g:no_turbux_mappings = 1
-" map <leader>t <Plug>SendTestToTmux
-" map <leader><leader>t <Plug>SendFocusedTestToTmux
-" map <Leader>T :call RunAllSpecs()<CR>
-
-" " Tmux + RSpec + Spring
-" function! SetRspecCommand()
-"   " q - exit tmux's visual mode
-"   " C-u - clear existing input
-  " C-c (twice) - abort currently running spec
-  " let common_prefix = 'q'
-  " call system('bundle show spring')
-  " if !v:shell_error
-  "   let common_prefix = common_prefix.'spring '
-  " endif
-  " let g:turbux_command_prefix = common_prefix
-  " let g:rspec_command = 'call VimuxRunCommand("'.common_prefix.'rspec {spec}\n")'
-" endfunction
-" call SetRspecCommand()
 
 """ FANCYNESS
 
