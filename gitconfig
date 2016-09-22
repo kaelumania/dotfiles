@@ -7,7 +7,7 @@
   b = branch
 	c = commit -v
   cm = commit -m
-  cam = !git add -A and git commit -m
+  cam = !git add -A & git commit -m
   co = checkout
   cob = checkout -b
   r = remote
