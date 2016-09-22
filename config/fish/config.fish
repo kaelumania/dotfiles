@@ -1,6 +1,3 @@
-# load additional completions
-# autoload $OMF_CONFIG/completions/
-
 # remove greeting
 set fish_greeting
 
