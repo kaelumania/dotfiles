@@ -47,20 +47,34 @@
 
 * `CMD-?` highlight cursor position
 * `ALT-t` bring iterm to front
+* `CTRL-Tab` cycle tabs
 * `CMD-arrows` navigate through tabs
 * `CMD-number` jump to tab with number
 * scroll page up/down
 
 ## FISH
 
+* <kbd>&#119891;</kbd> <kbd>&#8592;</kbd>, <kbd>&#8963;</kbd> <kbd>a</kbd>  - Go to beginning of line
+* <kbd>&#119891;</kbd> <kbd>&#8594;</kbd>, <kbd>&#8963;</kbd> <kbd>e</kbd>  - Go to end of line
+* <kbd>&#8997;</kbd> <kbd>&#8594;</kbd>, <kbd>&#8997;</kbd> <kbd>f</kbd>    - Go one word forward
+* <kbd>&#8997;</kbd> <kbd>&#8592;</kbd>, <kbd>&#8997;</kbd> <kbd>b</kbd>    - Go one word backward
+* <kbd>&#8963;</kbd> <kbd>u</kbd>           - Delete to beginning of line
+* <kbd>&#8963;</kbd> <kbd>k</kbd>           - Delete to end of line (CLASHES TMUX NAVIGATION)
+* <kbd>&#8963;</kbd> <kbd>w</kbd>           - Delete word before cursor
+* <kbd>&#8963;</kbd> <kbd>u</kbd>           - Delete word after cursor (NOT WORKING)
+
+Other
 * navigation
 * string manipulation (vi binding?eol?bol?)
 * command search (peco)
 * env setzen
 * custom functions
 
+https://www.cheatography.com/myounkin/cheat-sheets/fish-shell/
+
 ## TMUX
 
+* `CTRL`-`h`, `j`, `k`, `l` navigate panes
 * `CTRL-b` activation key must be prefixed before each command
   * `z` toggle zoom current pane
   * `c` create new window
