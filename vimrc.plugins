@@ -39,6 +39,7 @@ Plug 'tpope/vim-haml'
 Plug 'pangloss/vim-javascript'
 Plug 'othree/html5.vim'
 Plug 'othree/xml.vim'
+Plug 'elixir-lang/vim-elixir'
 
 " Tmux
 Plug 'christoomey/vim-tmux-navigator'
