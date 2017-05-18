@@ -16,13 +16,19 @@ These are my current dotfiles and setup code
 
 ### Install powerline font
 
-Install the font on your system:
+Install powerline fonts:
 
-https://gist.github.com/baopham/1838072#file-monaco-for-powerline-otf
+`git clone https://github.com/powerline/fonts.git && cd fonts && ./install.sh`
 
 Add this font to iTerm2:
 
 `iTerm > Preferences > Profiles > Text`
+
+### Install solarized color scheme
+
+Install solarized themes
+
+`git clone https://github.com/altercation/solarized`
 
 ## Side Notes
 
