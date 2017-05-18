@@ -30,20 +30,10 @@ brew 'reattach-to-user-namespace'
 brew 'the_silver_searcher'
 brew 'tmux'
 
-# quicklook plugins
-cask 'qlcolorcode'
-cask 'qlstephen'
-cask 'qlmarkdown'
-cask 'quicklook-json'
-cask 'quicklook-csv'
-cask 'qlimagesize'
-cask 'webpquicklook'
-
 # Programs
 cask 'alfred'
 cask 'divvy'
 cask 'dropbox'
 cask 'iterm2'
-cask 'sublime-text'
 cask 'google-chrome'
 cask 'vlc'
