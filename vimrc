@@ -273,7 +273,7 @@ set termguicolors
 set background=dark
 Plug 'chriskempson/base16-vim'
 function! s:SetColorScheme()
-  if filereadable(expand("~/.vim/plugged/base16-vim/colors/base16-default-dark.vim"))
+  if filereadable(expand("~/.vim/plugged/base16-vim/colors/base16-solarized-dark.vim"))
     colorscheme base16-solarized-dark
   end
 endfunction
