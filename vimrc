@@ -1,21 +1,26 @@
+set nocompatible
+
 """ VIM-PLUG
-if filereadable(expand("~/.vimrc.plugins"))
-  source ~/.vimrc.plugins
-endif
+call plug#begin('~/.vim/plugged')
+
+" Basic
+Plug 'tpope/vim-repeat'
 
 " http://stackoverflow.com/questions/12230290/vim-errors-on-vim-startup-when-run-in-fish-shell
 set shell=/bin/sh
 
-""" GENERAL SETTINGS
+" Hide startup message
+set shortmess=atI
 
 " Enable filetype detection
 filetype plugin indent on
 
 " Enable syntax highlighting
 syntax on
+Plug 'sheerun/vim-polyglot'
 
 " Don’t highlight after 1000th column
-set synmaxcol=1000
+set synmaxcol=500
 
 " Show line numbers
 set number
@@ -74,13 +79,12 @@ set fileencoding=utf-8
 " Reload changes if detected
 set autoread
 
-" Search highlighting
-set hlsearch
-
-" Highlight as you type
-set incsearch
-set ignorecase
-set smartcase
+" Buffer search
+set hlsearch   " Search highlighting
+set incsearch  " Highlight search as you type
+set ignorecase " Ignore case in search...
+set smartcase  " ... except when pattern contains uppercase characters
+set gdefault   " Search globally by default
 
 " Auto-continue comments
 set formatoptions=croql
@@ -124,12 +128,21 @@ if !isdirectory(expand(&viewdir))
   call mkdir(expand(&viewdir), "p")
 endif
 
-" Hide startup message
-set shortmess=atI
+" Use syntax omnicomplete if no ft specific is available
+if has("autocmd") && exists("+omnifunc")
+  autocmd Filetype *
+        \ if &omnifunc == "" |
+        \   setlocal omnifunc=syntaxcomplete#Complete |
+        \ endif
+endif
 
 " Arbitrary selection in visual block mode
 set virtualedit+=block
 
+" TMUX
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'benmills/vimux'
+Plug 'sjl/vitality.vim'
 " Resize splits when the window is resized
 au VimResized * :wincmd =
 
@@ -164,12 +177,16 @@ nnoremap <silent> <space> :noh<cr><space>
 " Reformat whole file
 map <silent> <leader>f gg=G''
 
+" Remove trailing whitespace including non-breaking spaces
+command! -range=% RemoveTrailingWhitespace <line1>,<line2>s/\(\s\| \)\+$// | norm! ``
+nnoremap <leader>rt :RemoveTrailingWhitespace<CR>
+vnoremap <leader>rt :RemoveTrailingWhitespace<CR> 
+
 " Allow to repeat command over multiple lines separately
 vnoremap . :norm.<CR>
 
-""" PLUGIN SPECIFIC CONFIG
-
-" NERDtree
+" File Explorer / NERDtree
+Plug 'scrooloose/nerdtree'
 let g:NERDTreeChDirMode=2
 let g:NERDTreeShowHidden=1
 " These mappings would interfere with vim-tmux-navigator
@@ -179,20 +196,70 @@ let NERDTreeIgnore=[  '^\.git$', 'DS_STORE' ]
 nnoremap <silent> <leader>n :NERDTreeToggle<cr>
 nnoremap <silent> <leader><leader>n :NERDTreeFind<cr>
 
-" Ctrl-P
-if filereadable(expand("~/.vim/plugged/ctrlp.vim/plugin/ctrlp.vim"))
-  let g:ctrlp_show_hidden = 1
-  autocmd! bufwritepost * CtrlPClearCache
-  autocmd! bufenter * CtrlPClearCache
-  if executable('ag')
-    let g:ctrlp_user_command = 'ag %s -l --hidden --ignore .git --nocolor -g ""'
-    let g:ctrlp_use_caching = 0
-  end
+" File Search / Ctrl-P
+Plug 'kien/ctrlp.vim'
+let g:ctrlp_show_hidden = 1
+" let g:ctrlp_root_markers = ['mix.exs', 'Gemfile']
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --hidden --ignore .git --nocolor -g ""'
+  let g:ctrlp_use_caching = 0
 end
 
-" Ack/Ag
+" Project search
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep --smart-case'
+  set grepprg=ag\ --vimgrep\ $*
+  set grepformat=%f:%l:%c:%m
+endif
+command! -nargs=+ -complete=file G :silent grep! <args> | cwindow | redraw!
+nnoremap <leader>a :G ""<left>
+xnoremap <leader>a :<C-u>G ""<left>
+au Filetype qf nnoremap <buffer> o <cr>
+au Filetype qf nnoremap <buffer> go <cr><C-w><C-w>
+
+" Make directory on the fly with :e
+Plug 'pbrisbin/vim-mkdir'
+
+" Automatically insert `end`
+Plug 'tpope/vim-endwise'
+
+" Comments
+Plug 'tpope/vim-commentary'
+
+" Surround
+Plug 'tpope/vim-surround'
+
+" Exchange regions
+Plug 'tommcdo/vim-exchange'
+
+" % matching
+Plug 'tmhedberg/matchit'
+
+" Ruby/Rails
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-rake'
+Plug 'tpope/vim-rbenv'
+Plug 'joker1007/vim-ruby-heredoc-syntax'
+
+" Elixir/Phoenix
+Plug 'spiegela/vimix'
+Plug 'c-brenn/phoenix.vim'
+Plug 'slashmili/alchemist.vim'
+let g:alchemist#elixir_erlang_src = "/usr/local/share/src"
+
+" Markdown
+Plug 'plasticboy/vim-markdown'
+let g:vim_markdown_folding_disabled = 1
+
+" Delete all hidden buffers
+function! DeleteHiddenBuffers()
+    let tpbl=[]
+    call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
+    for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
+        silent execute 'bwipeout' buf
+    endfor
+endfunction
+command! DeleteHiddenBuffers :call DeleteHiddenBuffers()
 endif
 cnoreabbrev ag Ack
 cnoreabbrev aG Ack
