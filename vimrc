@@ -199,7 +199,7 @@ nnoremap <silent> <leader><leader>n :NERDTreeFind<cr>
 " File Search / Ctrl-P
 Plug 'kien/ctrlp.vim'
 let g:ctrlp_show_hidden = 1
-" let g:ctrlp_root_markers = ['mix.exs', 'Gemfile']
+let g:ctrlp_root_markers = ['mix.exs', 'Gemfile']
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --hidden --ignore .git --nocolor -g ""'
   let g:ctrlp_use_caching = 0
@@ -260,89 +260,60 @@ function! DeleteHiddenBuffers()
     endfor
 endfunction
 command! DeleteHiddenBuffers :call DeleteHiddenBuffers()
-endif
-cnoreabbrev ag Ack
-cnoreabbrev aG Ack
-cnoreabbrev Ag Ack
-cnoreabbrev AG Ack
 
-" GitGutter
+" Disable Background Color Erase (BCE) so that color schemes
+" render properly when inside 256-color tmux and GNU screen.
+" https://github.com/vim/vim/issues/804#issuecomment-225085911
+if &term =~ '256color'
+  set t_ut=
+endif
+
+" Color scheme
+set termguicolors
+set background=dark
+Plug 'chriskempson/base16-vim'
+function! s:SetColorScheme()
+  if filereadable(expand("~/.vim/plugged/base16-vim/colors/base16-default-dark.vim"))
+    colorscheme base16-solarized-dark
+  end
+endfunction
+au VimEnter * call s:SetColorScheme()
+function! s:SimpleGutterColors()
+  hi VertSplit ctermbg=none guibg=NONE
+  hi LineNr ctermbg=none guibg=NONE
+  hi FoldColumn ctermbg=none guibg=NONE
+  hi SignColumn ctermbg=none guibg=NONE
+endfunction
+au VimEnter,ColorScheme * call s:SimpleGutterColors()
+
+" Invisibles
+set listchars=tab:▸\ ,eol:¬,trail:·,extends:>,precedes:<,nbsp:␣
+
+" Splits
+set fillchars+=vert:│
+hi VertSplit ctermbg=none ctermfg=10 guibg=NONE guifg=#202020
+
+" Git Helper
+Plug 'tpope/vim-fugitive'
+
+" Gutter
+Plug 'airblade/vim-gitgutter'
 hi GitGutterAdd ctermfg=green guifg=NONE
 hi GitGutterDelete ctermfg=red guifg=NONE
 hi GitGutterChange ctermfg=yellow guifg=NONE
 hi GitGutterChangeDelete ctermfg=yellow guifg=NONE
 
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_ruby_checkers = ['rubocop']
-let g:syntastic_mode_map = {'mode': 'passive'}
-
-" RSpec
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-
-" Preserve EOL
-let g:PreserveNoEOL = 1
-let g:PreserveNoEOL_Function = function('PreserveNoEOL#Internal#Preserve')
-
-""" FANCYNESS
-
-" Colors
-set t_Co=256
-" let g:solarized_termcolors=256
-set background=dark
-colorscheme solarized
-
-" Hightlight current line
-set cursorline
-
-" Invisibles
-set listchars=tab:▸\ ,eol:¬,trail:·,extends:>,precedes:<,nbsp:␣
-
-"" Splits
-set fillchars+=vert:│
-hi VertSplit ctermbg=none ctermfg=10 guibg=NONE guifg=#202020
-
-" Gutter
 hi LineNr ctermbg=none guibg=NONE
 hi FoldColumn ctermbg=none guibg=NONE
 hi SignColumn ctermbg=none guibg=NONE
 hi Error ctermfg=red ctermbg=none guifg=red guibg=NONE
 hi Todo ctermfg=178 ctermbg=none guifg=orange guibg=NONE
 
-" Airline
-set laststatus=2
-set noshowmode
-let g:airline_enable_hunks = 0
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_section_z = '%l:%c %p%%'
-let g:airline_section_b = '%{substitute(getcwd(), ".*\/", "", "g")}'
-let g:airline_section_c = '%F'
-let g:airline_mode_map = {
-  \ 'n'  : 'N',
-  \ 'i'  : 'I',
-  \ 'R'  : 'R',
-  \ 'v'  : 'V',
-  \ 'V'  : 'VL',
-  \ 'c'  : 'CMD',
-  \ '' : 'VB',
-  \ }
-
-""" LOCAL CONFIG
-
 " Reload vimrc after saving it
 autocmd! bufwritepost vimrc* source ~/.vimrc
 
-if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
-endif
+call plug#end()
+
+" Load project specific .vimrc files
+set exrc
+set secure

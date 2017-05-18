@@ -7,6 +7,9 @@ set -gx EDITOR vim
 # nicer ls colors
 export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 
+# use 256 colors (fixes tmux colors)
+export TERM="xterm-256color"
+
 # Base abbr.
 abbr -a v vim
 abbr -a g git
