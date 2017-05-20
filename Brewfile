@@ -26,7 +26,6 @@ brew 'rcm'
 # Other
 brew 'rbenv'
 brew 'ruby-build'
-brew 'reattach-to-user-namespace'
 brew 'the_silver_searcher'
 brew 'tmux'
 
