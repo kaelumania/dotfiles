@@ -20,7 +20,7 @@ syntax on
 Plug 'sheerun/vim-polyglot'
 
 " Don’t highlight after 1000th column
-set synmaxcol=500
+set synmaxcol=700
 
 " Show line numbers
 set number
@@ -33,7 +33,7 @@ set colorcolumn=+0
 set ttimeoutlen=50
 
 " update 500ms after stop typing
-set updatetime=500
+set updatetime=200
 
 " Default to soft tabs/two spaces
 set expandtab
@@ -67,9 +67,6 @@ end
 
 " Share clipboard
 set clipboard=unnamed
-
-" Nobody likes \ as leader!
-let mapleader = ","
 
 " UTF-8
 set nobomb
@@ -148,6 +145,9 @@ au VimResized * :wincmd =
 
 """ CUSTOM MAPPINGS AND COMMANDS
 
+" Nobody likes \ as leader!
+let mapleader = ","
+
 " E.g. press ;w instead of shift : unshift w
 nnoremap ; :
 
@@ -201,7 +201,7 @@ Plug 'kien/ctrlp.vim'
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_root_markers = ['mix.exs', 'Gemfile']
 if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --hidden --ignore .git --nocolor -g ""'
+  let g:ctrlp_user_command = 'ag %s -l --hidden --ignore .git --ignore _build --nocolor -g ""'
   let g:ctrlp_use_caching = 0
 end
 
@@ -241,6 +241,11 @@ Plug 'tpope/vim-rake'
 Plug 'tpope/vim-rbenv'
 Plug 'joker1007/vim-ruby-heredoc-syntax'
 
+" Text Objects
+Plug 'kana/vim-textobj-user'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'nelstrom/vim-textobj-rubyblock'
+
 " Elixir/Phoenix
 Plug 'spiegela/vimix'
 Plug 'c-brenn/phoenix.vim'
@@ -279,10 +284,12 @@ function! s:SetColorScheme()
 endfunction
 au VimEnter * call s:SetColorScheme()
 function! s:SimpleGutterColors()
-  hi VertSplit ctermbg=none guibg=NONE
+  hi VertSplit ctermbg=none ctermfg=10 guibg=NONE guifg=#808080
   hi LineNr ctermbg=none guibg=NONE
   hi FoldColumn ctermbg=none guibg=NONE
   hi SignColumn ctermbg=none guibg=NONE
+  hi Error ctermfg=red ctermbg=none guifg=red guibg=NONE
+  hi Todo ctermfg=178 ctermbg=none guifg=orange guibg=NONE
 endfunction
 au VimEnter,ColorScheme * call s:SimpleGutterColors()
 
@@ -291,23 +298,16 @@ set listchars=tab:▸\ ,eol:¬,trail:·,extends:>,precedes:<,nbsp:␣
 
 " Splits
 set fillchars+=vert:│
-hi VertSplit ctermbg=none ctermfg=10 guibg=NONE guifg=#202020
 
 " Git Helper
 Plug 'tpope/vim-fugitive'
 
 " Gutter
 Plug 'airblade/vim-gitgutter'
-hi GitGutterAdd ctermfg=green guifg=NONE
-hi GitGutterDelete ctermfg=red guifg=NONE
-hi GitGutterChange ctermfg=yellow guifg=NONE
-hi GitGutterChangeDelete ctermfg=yellow guifg=NONE
-
-hi LineNr ctermbg=none guibg=NONE
-hi FoldColumn ctermbg=none guibg=NONE
-hi SignColumn ctermbg=none guibg=NONE
-hi Error ctermfg=red ctermbg=none guifg=red guibg=NONE
-hi Todo ctermfg=178 ctermbg=none guifg=orange guibg=NONE
+hi GitGutterAdd ctermfg=green guifg=green
+hi GitGutterDelete ctermfg=red guifg=red
+hi GitGutterChange ctermfg=yellow guifg=yellow
+hi GitGutterChangeDelete ctermfg=yellow guifg=red
 
 " Reload vimrc after saving it
 autocmd! bufwritepost vimrc* source ~/.vimrc

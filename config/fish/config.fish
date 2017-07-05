@@ -1,6 +1,8 @@
 # remove greeting
 set fish_greeting
 
+set -x PATH $HOME/.fastlane/bin $PATH
+
 # Set default editor to vim
 set -gx EDITOR vim
 
