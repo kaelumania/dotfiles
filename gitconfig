@@ -37,7 +37,7 @@
 	ui = true
 
 [core]
-	excludesfile = /Users/stephanepping/.gitignore
+	excludesfile = /Users/kaelumania/.gitignore_global
 	attributesfile = ~/.gitattributes
 	editor = vim
 [color "branch"]
@@ -63,8 +63,8 @@
 [push]
   default = simple
 [user]
-  email = stephan.epping@zweitag.de
-  name = Stephan Epping
+	email = epping@bitside.de
+	name = Stephan Epping
 [filter "media"]
   clean = git media clean %f
   smudge = git media smudge %f
@@ -81,5 +81,7 @@
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[commit]
+	template = /Users/kaelumania/.stCommitMsg

@@ -33,6 +33,9 @@ abbr -a gd git d
 abbr -a gdf git diff
 abbr -a gdfc git diff --cached
 
+# rbenv
+status --is-interactive; and . (rbenv init -|psub)
+
 # Use vi bindings
 # https://github.com/fish-shell/fish-shell/issues/2254
 # fish_vi_mode
@@ -49,3 +52,4 @@ function fish_user_key_bindings
   bind \cr 'peco_select_history (commandline -b)'
   bind -M insert \cr 'peco_select_history (commandline -b)'
 end
+set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
