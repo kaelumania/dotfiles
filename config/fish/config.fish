@@ -1,11 +1,16 @@
-# load additional completions
-# autoload $OMF_CONFIG/completions/
-
 # remove greeting
 set fish_greeting
 
+set -x PATH $HOME/.fastlane/bin $PATH
+
 # Set default editor to vim
 set -gx EDITOR vim
+
+# nicer ls colors
+export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
+
+# use 256 colors (fixes tmux colors)
+export TERM="xterm-256color"
 
 # Base abbr.
 abbr -a v vim
@@ -20,7 +25,7 @@ abbr -a ga git add
 abbr -a gb git branch
 abbr -a gc git commit -v
 abbr -a gcm git commit -m
-abbr -a gcam git add -A and git commit -m
+abbr -a gcam "git add -A ;and git commit -m"
 abbr -a gco git checkout
 abbr -a gcob git checkout -b
 abbr -a gr git remote
