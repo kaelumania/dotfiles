@@ -4,25 +4,15 @@ These are my current dotfiles and setup code
 
 ## Setup a new Machine
 
-### Clone this repository
+### Install dotfiles and configs
 
-`git clone git@github.com:kaelumania/dotfiles.git ~/.dotfiles`
-
-### Execute Makefile
-
-`make install`
-
-`./osx.sh`
+`sh <(curl -fsSL https://raw.githubusercontent.com/padde/dotfiles/master/install.sh)`
 
 ### Install powerline font
 
 Install powerline fonts:
 
 `git clone https://github.com/powerline/fonts.git && cd fonts && ./install.sh`
-
-Add this font to iTerm2:
-
-`iTerm > Preferences > Profiles > Text`
 
 ### Install solarized color scheme
 

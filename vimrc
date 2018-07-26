@@ -276,22 +276,7 @@ endif
 " Color scheme
 set termguicolors
 set background=dark
-Plug 'chriskempson/base16-vim'
-function! s:SetColorScheme()
-  if filereadable(expand("~/.vim/plugged/base16-vim/colors/base16-solarized-dark.vim"))
-    colorscheme base16-solarized-dark
-  end
-endfunction
-au VimEnter * call s:SetColorScheme()
-function! s:SimpleGutterColors()
-  hi VertSplit ctermbg=none ctermfg=10 guibg=NONE guifg=#808080
-  hi LineNr ctermbg=none guibg=NONE
-  hi FoldColumn ctermbg=none guibg=NONE
-  hi SignColumn ctermbg=none guibg=NONE
-  hi Error ctermfg=red ctermbg=none guifg=red guibg=NONE
-  hi Todo ctermfg=178 ctermbg=none guifg=orange guibg=NONE
-endfunction
-au VimEnter,ColorScheme * call s:SimpleGutterColors()
+colorscheme flattened_dark
 
 " Invisibles
 set listchars=tab:▸\ ,eol:¬,trail:·,extends:>,precedes:<,nbsp:␣

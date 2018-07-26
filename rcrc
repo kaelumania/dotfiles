@@ -1,2 +1,2 @@
-EXCLUDES='Brewfile Makefile osx.sh rcrc README.md CHEATSHEET.md'
+EXCLUDES='Brewfile install.sh rcrc README.md CHEATSHEET.md'
 SYMLINK_DIRS='vim'
